@@ -1,0 +1,9 @@
+<form [formGroup]="uploadForm" (ngSubmit)="uploadFile()">
+  <div class="form-group">
+     <input type="text" formControlName="arquivo">
+  </div>
+  <button class="btn btn-primary" type="submit">Enviar</button>
+</form>
+
+<button type="button" class="btn btn-primary">Enviar</button>
+<button class="btn btn-primary" (click)="teste()">Buscar</button>
