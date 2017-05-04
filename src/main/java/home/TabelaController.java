@@ -31,7 +31,7 @@ public class TabelaController {
     public void dbf(){
         System.out.println("Inserindo no banco");
 
-        DbfToMongo.insertToMongo( new File("streets.dbf"),  new File("streets.txt"), Charset.forName("cp866"));
+        DbfToMongo.insertToMongo( new File("streets.dbf"), Charset.forName("cp866"));
 
     }
 
@@ -73,6 +73,11 @@ public class TabelaController {
 
         DbfToJson.writeToJsonFile( new File("streets.dbf"),  new File("streets.txt"), Charset.forName("cp866"));
 
+    }
+
+    @RequestMapping(value = "/getFile/{path}", method = RequestMethod.POST)
+    public void getFile(@PathVariable String path) {
+        DbfToMongo.insertToMongo( new File(path), Charset.forName("cp866"));
     }
 
 

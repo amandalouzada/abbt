@@ -6,6 +6,8 @@ streets.dbf
 node_modules/
 build/
 
+ng2-electron/node_modules/
+
 # User-specific stuff:
 .idea/**/workspace.xml
 .idea/**/tasks.xml

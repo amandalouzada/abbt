@@ -14,16 +14,15 @@ import java.nio.charset.Charset;
  * Created by amanda on 27/04/17.
  */
 public class DbfToMongo {
-    public static void insertToMongo(File dbf, File txt, Charset dbfEncoding) {
+    public static void insertToMongo(File dbf, Charset dbfEncoding) {
         long tempoInicial = System.currentTimeMillis();
         // método que deve ser verificado o tempo de execução
         MongoHelper mongoHelper = MongoHelper.getInstance("localhost:27017", "abbt");
         Document document = new Document();
 
-        try (
-                DbfReader reader = new DbfReader(dbf);
-                PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(txt)))
-        ) {
+
+            DbfReader reader = new DbfReader(dbf);
+
             DbfHeader header = reader.getHeader();
 
             String[] titles = new String[header.getFieldsCount()];
@@ -37,7 +36,7 @@ public class DbfToMongo {
 
             Object[] row;
             while ((row = reader.nextRecord()) != null) {
-                for (int i = 0; i < header.getFieldsCount(); i++) {writer.print(':');
+                for (int i = 0; i < header.getFieldsCount(); i++) {
                     DbfField field = header.getField(i);
                     String value = field.getDataType() == 'C'
                             ? new String((byte[]) row[i], dbfEncoding)
@@ -48,9 +47,7 @@ public class DbfToMongo {
                 mongoHelper.insert("abbt_tabela",document);
                 document = new Document();
             }
-        } catch (IOException e) {
-            throw new DbfException("Cannot write .dbf file to .txt", e);
-        }
+
 
         long tempoFinal = System.currentTimeMillis();
         System.out.println( "TEMPO");
