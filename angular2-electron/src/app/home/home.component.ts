@@ -11,8 +11,7 @@ export class HomeComponent implements OnInit {
   private uploadForm: FormGroup;
   private file: File;
   public arquivo: any;
-  private colunas: any =[];
-  private linha: any =[];
+  private linhas: any =[];
 
   constructor(private formBuilder: FormBuilder, private homeService: HomeService) {
     this.uploadForm = this.formBuilder.group({
@@ -25,12 +24,13 @@ export class HomeComponent implements OnInit {
 
 
   uploadFile(){
-    this.homeService.inserir(this.uploadForm.value.arquivo);
+    let arquivo = this.uploadForm.value.arquivo;
+    this.homeService.getTabela(arquivo).subscribe(data=> console.log(data));;
   }
 
 
   teste() {
-    this.homeService.getTabela(4,4).subscribe(data=> console.log(data));
+    this.homeService.listarTabela(4,4).subscribe(data=> console.log(data));
   }
 
 }

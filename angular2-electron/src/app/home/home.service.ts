@@ -9,9 +9,8 @@ import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class HomeService {
-  private url = 'http://localhost:8080/getFile/';
-  private urlTabela = 'http://localhost:8080/listar/';
-
+  private urlListar = 'http://localhost:8080/listar/';
+  private urlTabela = 'http://localhost:8080/getFile/';
 
   // URL to web api
 
@@ -24,9 +23,14 @@ export class HomeService {
         .map(res => res.json());
     }
 
-    getTabela(limite, pular){
-     return this.http.get(this.urlTabela+limite+"/"+pular)
+    getTabela(c){
+     return this.http.get(this.urlTabela+c)
        .map(res => res.json());
    }
+
+   listarTabela(l,p){
+      return this.http.get(this.urlListar+l+"/"+p)
+        .map(res => res.json());
+    }
 
 }

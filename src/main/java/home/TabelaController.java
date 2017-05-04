@@ -78,7 +78,7 @@ public class TabelaController {
     @RequestMapping(value = "/getFile/{path}", method= RequestMethod.GET)
     public void getFile(@PathVariable String path) {
         System.out.println("inserindo");
-        DbfToMongo.insertToMongo( new File(path), Charset.forName("cp866"));
+        DbfToMongo.insertToMongo( new File(path+".dbf"), Charset.forName("cp866"));
     }
 
 

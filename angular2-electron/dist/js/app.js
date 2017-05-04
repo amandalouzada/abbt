@@ -6641,8 +6641,7 @@ webpackJsonp([0],[
 	    function HomeComponent(formBuilder, homeService) {
 	        this.formBuilder = formBuilder;
 	        this.homeService = homeService;
-	        this.colunas = [];
-	        this.linha = [];
+	        this.linhas = [];
 	        this.uploadForm = this.formBuilder.group({
 	            arquivo: [''],
 	        });
@@ -6650,10 +6649,12 @@ webpackJsonp([0],[
 	    HomeComponent.prototype.ngOnInit = function () {
 	    };
 	    HomeComponent.prototype.uploadFile = function () {
-	        this.homeService.inserir(this.uploadForm.value.arquivo);
+	        var arquivo = this.uploadForm.value.arquivo;
+	        this.homeService.getTabela(arquivo).subscribe(function (data) { return console.log(data); });
+	        ;
 	    };
 	    HomeComponent.prototype.teste = function () {
-	        this.homeService.getTabela(4, 4).subscribe(function (data) { return console.log(data); });
+	        this.homeService.listarTabela(4, 4).subscribe(function (data) { return console.log(data); });
 	    };
 	    HomeComponent = __decorate([
 	        core_1.Component({
@@ -6682,15 +6683,19 @@ webpackJsonp([0],[
 	    // URL to web api
 	    function HomeService(http) {
 	        this.http = http;
-	        this.url = 'http://localhost:8080/getFile/';
-	        this.urlTabela = 'http://localhost:8080/listar/';
+	        this.urlListar = 'http://localhost:8080/listar/';
+	        this.urlTabela = 'http://localhost:8080/getFile/';
 	    }
 	    HomeService.prototype.inserir = function (caminho) {
 	        return this.http.get(this.url + caminho)
 	            .map(function (res) { return res.json(); });
 	    };
-	    HomeService.prototype.getTabela = function (limite, pular) {
-	        return this.http.get(this.urlTabela + limite + "/" + pular)
+	    HomeService.prototype.getTabela = function (c) {
+	        return this.http.get(this.urlTabela + c)
+	            .map(function (res) { return res.json(); });
+	    };
+	    HomeService.prototype.listarTabela = function (l, p) {
+	        return this.http.get(this.urlListar + l + "/" + p)
 	            .map(function (res) { return res.json(); });
 	    };
 	    HomeService = __decorate([
@@ -6711,7 +6716,7 @@ webpackJsonp([0],[
 /* 69 */
 /***/ (function(module, exports) {
 
-	module.exports = "<form [formGroup]=\"uploadForm\" (ngSubmit)=\"uploadFile()\">\n  <div class=\"form-group\">\n     <input type=\"text\" formControlName=\"arquivo\">\n  </div>\n  <button class=\"button\" type=\"submit\">Enviar</button>\n</form>\n\n<button class=\"button\" (click)=\"teste()\">Enviar</button>\n"
+	module.exports = "<form [formGroup]=\"uploadForm\" (ngSubmit)=\"uploadFile()\">\n  <div class=\"form-group\">\n     <input type=\"text\" formControlName=\"arquivo\">\n  </div>\n  <button class=\"btn btn-primary\" type=\"submit\">Enviar</button>\n</form>\n<button class=\"btn btn-primary\" (click)=\"teste()\">Buscar</button>\n\n<table class=\"table table-hover\">\n  <tbody>\n    <tr>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n    </tr>\n    <tr>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n    </tr>\n    <tr>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n    </tr>\n    <tr>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n    </tr>\n    <tr>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n    </tr>\n  </tbody>\n</table>\n\n\n<nav aria-label=\"Page navigation\">\n  <ul class=\"pagination\">\n    <li>\n      <a href=\"#\" aria-label=\"Previous\">\n        <span aria-hidden=\"true\">&laquo;</span>\n      </a>\n    </li>\n    <li><button class=\"btn btn-default\" (click)=\"teste()\">1</button></li>\n    <li><button class=\"btn btn-default\" (click)=\"teste()\">2</button></li>\n    <li><button class=\"btn btn-default\" (click)=\"teste()\">3</button></li>\n    <li><button class=\"btn btn-default\" (click)=\"teste()\">4</button></li>\n    <li><button class=\"btn btn-default\" (click)=\"teste()\">5</button></li>\n    <li>\n      <a href=\"#\" aria-label=\"Next\">\n        <span aria-hidden=\"true\">&raquo;</span>\n      </a>\n    </li>\n  </ul>\n</nav>\n"
 
 /***/ }),
 /* 70 */
