@@ -9,8 +9,8 @@ import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class HomeService {
-  private urlListar = 'http://localhost:8080/listar/';
-  private urlTabela = 'http://localhost:8080/getFile/';
+  private urlListar = 'http://localhost:3000/teste';
+  private urlTabela = 'http://localhost:3000/teste';
 
   // URL to web api
 

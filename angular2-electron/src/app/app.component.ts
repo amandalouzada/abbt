@@ -13,6 +13,7 @@ import '../style/app.scss';
   template: require('./app.component.html'),
   styles: [require('./app.component.scss')],
 })
+
 export class AppComponent {
   url = 'https://github.com/preboot/angular2-webpack';
 
