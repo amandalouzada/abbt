@@ -5,6 +5,10 @@ streets.dbf
 *.dbf
 node_modules/
 build/
+electron/node_modules/
+front/node_modules/
+rest-api-express/node_modules/
+rest-api-express/uploads/
 
 ng2-electron/node_modules/
 
